@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Example</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <table>
+    <tr>
+        <th>מקרי קיצון</th>
+        <th>query params</th>
+        <th> url מה הכתובת </th>
+        <th>bodyמה שולחים ב</th>
+        <th>method איזה </th>
+        <th>הסבר</th>
+        <th>מה מחזיר</th>
+        <th>  (crud) איזה פעולה</th>
+      
+    </tr>
+    
+    <script>
+       const  valuesArray = [" ", " ", "api/user", "{ name, email, tz, password,role:defult-user,DateOfReg:default-new Date}","post"
+, "מחזיר את משתמש החדש + הטוקן Returns all new and token user information"
+, "{ name, email, tz,role ,DateOfRegtoken}"
+, "creat"," ", " ", "api/user/login", "name,password:חובה{ email, tz,role:defult- user,DateOfReg:default-new Date }"
+, "post", "מחזיר את כל  פרטי המשתמש + והטוקן  Returns all user information + and the token", "{ name, email, tz, password,role:defult-user,DateOfReg:default-new Datetoken",
+ "creat"," Need to send in the HEADERS of the TOKEN manager צריך לשלוח טוקן של מנהל בהדרס "," " ,"api/user"," "
+ ,"get","מחזיר את כל המשתמשים הקיימי Returns all existing usersם","per user: { name, email, tz,role ,DateOfReg, password} ","read"
+,"Need to send in the HEADERS of the TOKEN manage"," ","/api/watch","model:requird,price:requird,description,material,collectionMichele,caseSize,strapSize"+'\n'+",category,silhouette,TotalDiamondCount,TotalDiamondCarats,urlImg",
+"post"," עם -מזהה של המערכת"," מחזיר את המוצר שהוסיפו  ","create"," ","search , page , perPage","/api/watch/?search=a"," ","get",
+"כמות לעמוד , מס עמוד , שליפת כל מי שבתאור יש לך את הטקסט שנשלח בתוך search ","שליפת כל המוצרים עם אפשרות להגבלות שונות","read",
+" "," ","api/watch/{_id}"," ","get","מחזירה מוצר לפי ה ID","_id,model,price,description,"+'\n'+"material,collectionMichele,caseSize,strapSize"+'\n'+",category,silhouette,TotalDiamondCount"+'\n'+",TotalDiamondCarats,urlImg",
+"read","Need to send in the HEADERS of the TOKEN manage"," ","api/watch/{id}"," ","delete","מחיקת מוצר לפי ID ר המנהל מורשה",
+"_id,model,price,description,"+'\n'+"material,collectionMichele,caseSize,strapSize"+'\n'+",category,silhouette,TotalDiamondCount"+'\n'+",TotalDiamondCarats,urlImg","delete",
+"Need to send in the HEADERS of the TOKEN manage"," ","api/watch/{id}","to example {price:900}","put","מקבל שדות לעדכון ומעדכן אותם","את האוביקט עם השדות המעודכנות","upDate"
+,"Need to send in the HEADERS of the TOKEN manage"," ","api/order","get","מחזיר את כל ההזמנות","מחזיר את כל ההזמנות"," ","read",
+"Need to send in the HEADERS of the TOKEN a sigh user "," ","api/order","numOrder,products","post","מוסיף הזמנה רק למשתמש רשום ","numOrder,products,ordering-id of the orderer,turnOn-false,orderDate:{new Date} ","create",
+"Need to send in the HEADERS of the TOKEN a ADMIN or "+'\n'+"of the orderer and also the turnOn:true "," ","api/order/{idFromOrder}"," ","delete","מוחק הזמנה שעוד לא יצאה לדרך","את ההזמנה שנמחקה","delete",
+"Need to send in the HEADERS of the TOKEN a sigh user"," ","api/order "," ","get","מחזיר את כל ההזמנות של המשתמש ששלו  הTOKEN"," ","read",
+"Need to send in the HEADERS of the TOKEN manage"," ","api/order/{idFromOrder}"," ","put","מעדכנת את שדה ה: turnOn:trueכלומר יצאה לדרך"," ","upDate"];
+
+      let cnt=0;
+        for (let i = 1; i <= 15; i++) {
+        document.write('<tr>');
+        for (let j = 1; j <= 8; j++) {
+          document.write('<td> ' +valuesArray[cnt++] + '</td>');
+        }
+        document.write('</tr>');
+      }
+    
+      
+    </script>
+  </table>
+
+</body>
+</html>
