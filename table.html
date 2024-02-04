@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table explain</title>
+    <style>
+        Table {
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        body {
+            direction: rtl;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1> rest api</h1>
+    <h2> השרת שלנו מכיל את ה-resources הבאים</h2>
+
+    <h2>כתובת השרת: <a href="http://localhost:3000">http://localhost:3000</a></h2>
+    <h3>watch</h3>
+    <table>
+        <tr>
+            <th>method</th>
+            <th> כתובת url </th>
+            <th> פרמטרים</th>
+            <th>body</th>
+            <th>headers</th>
+            <th>מה מחזיר</th>
+            <th>פרמטרים אופציונלים</th>
+            <th>curd operation</th>
+            <th> מקרי קיצון</th>
+            <th> תאור</th>
+        </tr>
+        <tr>
+            <td>get</td>
+            <td>api/watch/?search=a</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td> per watch:
+                _idmodel,description,collectionMichele,material,</br>material,caseSize,price,strapSize,</br>category,silhouette,TotalDiamondCount,</br>TotalDiamondCarats,urlImg
+            </td>
+            <td> page, perPage, search </td>
+            <td>read</td>
+            <td>400- שגיאה כללית</td>
+            <td>שליפת כל המוצרים </td>
+        </tr>
+        <tr>
+            <td>get</td>
+            <td>api/watch/{_id}</td>
+            <td>_id- קוד מוצר</td>
+            <td>-</td>
+            <td>-</td>
+            <td>_id,model,description,collectionMichele,material,</br>material,caseSize,price,strapSize,</br>category,silhouette,TotalDiamondCount,</br>TotalDiamondCarats,urlImg
+            </td>
+            <td> -</td>
+            <td>read</td>
+            <td> , 404- לא קיים כזה קוד מוצר ו-400 לשגיאה כללית</td>
+            <td>שליפת מוצר מסוים</td>
+        </tr>
+        <tr>
+            <td>post</td>
+            <td>/api/watch</td>
+            <td>-</td>
+            <td> model,description,collectionMichele,material,</br>material,caseSize,price,strapSize,</br>category,silhouette,TotalDiamondCount,</br>TotalDiamondCarats,urlImg
+            </td>
+            <td>token (my-token) admin</td>
+            <td>_id,model,description,collectionMichele,material,</br>material,caseSize,price,strapSize,</br>category,silhouette,TotalDiamondCount,</br>TotalDiamondCarats,urlImg
+            </td>
+            <td>-</td>
+            <td>create</td>
+            <td> 401- משתמש לא מוזההת 403 -משתמש לא מורשה 404 פרמטרים לא חוקייםת 409 כאשר קיים כבר כזה מוצר ו-400 לשגיאה
+                כללית</td>
+            <td>הוספת מוצר חדש</td>
+
+        </tr>
+        <tr>
+            <td>put</td>
+            <td>api/watch/{_id}</td>
+            <td>_id- קוד מוצר</td>
+            <td>model,description,collectionMichele,material,</br>material,caseSize,price,strapSize,</br>category,silhouette,TotalDiamondCount,</br>TotalDiamondCarats,urlImg
+            </td>
+            <td>token (my-token) admin</td>
+            <td>_id,model,description,collectionMichele,material,</br>material,caseSize,price,strapSize,</br>category,silhouette,TotalDiamondCount,</br>TotalDiamondCarats,urlImg
+            </td>
+            <td>-</td>
+            <td>update</td>
+            <td>  401-משתמש לא מוזהה, ו-403- משתמש לא מורשה, 404- פרמטרים לא חוקיים ו-400 לשגיאה כללית</br>404- קוד לא תקין</td>
+            <td>עדכון מוצר מסוים</td>
+        </tr>
+        <tr>
+            <td>delete</td>
+            <td>api/watch/{_id}</td>
+            <td>_id- קוד מוצר</td>
+            <td>-</td>
+            <td>token (my-token)admin</td>
+            <td>_idmodel,description,collectionMichele,material,</br>material,caseSize,price,strapSize,</br>category,silhouette,TotalDiamondCount,</br>TotalDiamondCarats,urlImg
+            </td>
+            <td>-</td>
+            <td>delete</td>
+            <td>401- משתמש לא מוזהה, 403- משתמש לא מורשה, 404- לא קיים כזה קוד מוצר, ו-400 לשגיאה כללית</td>
+            <td>מחיקה מוצר מסוים</td>
+        </tr>
+    </table>
+
+    <h3>users</h3>
+    <table>
+        <tr>
+            <th>method</th>
+            <th> כתובת url </th>
+            <th> פרמטרים</th>
+            <th>body</th>
+            <th>headers</th>
+            <th>מה מחזיר</th>
+            <th>פרמטרים אופציונלים</th>
+            <th>curd operation</th>
+            <th> מקרי קיצון</th>
+            <th> תאור</th>
+        </tr>
+        <tr>
+            <td>get</td>
+            <td>api/user</td>
+            <td>-</td>
+            <td>-</td>
+            <td>token (my-token) admin</td>
+            <td> per user: tz, name, DateOfReg , role</td>
+            <td>-</td>
+            <td>read</td>
+            <td>401- משתמש לא מוזהה , 403ת משתמש לא מורשהת 400 לשגיאה כללית</td>
+            <td>שליפת כל המשמשים לכל מי שהוא מנהל</td>
+        </tr>
+        <tr>
+            <td>post</td>
+            <td>api/user</td>
+            <td>-</td>
+            <td> tz:requird,  name:requird, DateOfReg:default-new Date:requird , password:requird, -(role:default-user) </td>
+            <td>-</td>
+            <td> tz, name, DateOfReg , role , token</td>
+            <td>-</td>
+            <td>create</td>
+            <td> 409 כאשר קיים כבר משמש עם כאלו פרטי ו-400 לשגיאה כללית</br>404-נתונים לא חוקיים</td>
+            <td> יצירת משתמש חדש</td>
+
+        </tr>
+        <tr>
+            <td>post</td>
+            <td>api/user/login</td>
+            <td>-</td>
+            <td>  name:requird, password:requirdtz, DateOfReg:default-new Date, -(role:default-user) </td>
+            <td>-</td>
+            <td> tz, name, DateOfReg , role ,token</td>
+            <td> -</td>
+            <td>create</td>
+            <td> 404 כאשר לא קיים משתמש עם כאלו פרטים ו-400 לשגיאה כללית</td>
+            <td> התחברות משתמש קיים </td>
+
+        </tr>
+
+    </table>
+    <h3>orders</h3>
+    <table>
+        <tr>
+            <th>method</th>
+            <th> כתובת url </th>
+            <th> פרמטרים</th>
+            <th>body</th>
+            <th>headers</th>
+            <th>מה מחזיר</th>
+            <th>פרמטרים אופציונלים</th>
+            <th>curd operation</th>
+            <th> מקרי קיצון</th>
+            <th> תאור</th>
+        </tr>
+        <tr>
+            <td>get</td>
+            <td>/api/order</td>
+            <td>-</td>
+            <td>-</td>
+            <td>token (my-token) admin</td>
+            <td> per order:
+                _id,numOrder,
+                products,
+                ordering-id of the orderer,
+                turnOn-false,
+                orderDate:{new Date}
+            </td>
+            <td>-</td>
+            <td>read</td>
+            <td>401- משמש לא מוזהה, 403- משתמש לא מורשה</td>
+            <td>שליפת כל ההזמנות במערכת</td>
+        </tr>
+        <tr>
+            <td>get</td>
+            <td>/api/order</td>
+            <td>-</td>
+            <td>-</td>
+            <td>token user</td>
+            <td>per order:
+                _id,numOrder,
+                products,
+                ordering-id of the orderer,
+                turnOn-false,
+                orderDate:{new Date}</td>
+            <td>-</td>
+            <td>read</td>
+            <td>401- משמש לא מוזהה, 404 -לא קיים כזה קוד משתמש, ו-400 לשגיאה כללית</td>
+            <td>שליפת כל ההזמנות למשתמש בעל התוקן </td>
+        </tr>
+
+        <tr>
+            <td>post</td>
+            <td>/api/order</td>
+            <td>-</td>
+            <td>numOrder,
+                products,
+                ordering-id of the orderer,
+                turnOn-false,
+                orderDate:{new Date}</td>
+            <td>token user</td>
+            <td> _id,numOrder,
+                products,
+                ordering-id of the orderer,
+                turnOn-false,
+                orderDate:{new Date}</td>
+            <td>-</td>
+            <td>create</td>
+            <td> 401- משתמש לא מוזההת 404 פרמטרים לא חוקיים/אין מוצרים בהזמנה/אין מוצר כזה . 409 כאשר קיים כבר כזה הזמנה ו-400 לשגיאה כללית</td>
+            <td>הוספת הזמנה חדשה</td>
+
+        </tr>
+        <tr>
+            <td>put</td>
+            <td>/api/order/{_id}</td>
+            <td>_id- קוד הזמנה</td>
+            <td>-</td>
+            <td>token (my-token) admin </td>
+            <td>_id,
+                numOrder,
+                products,
+                ordering-id of the orderer,
+                turnOn-false,
+                orderDate:{new Date}</td>
+            <td>-</td>
+            <td>update</td>
+            <td>401- משתמש לא מוזהה, 403- משתמש לא מורשה, 404- לא קיים כזה קוד הזמנה, ו-400 לשגיאה כללית</td>
+            <td>עדכון הזמנה מסוימת שיצאה לדרך</br>turnOn:true</td>
+        </tr>
+        <tr>
+            <td>delete</td>
+            <td>/api/order/{_id}</td>
+            <td>_id- קוד הזמנה</td>
+            <td>-</td>
+            <td>token (my-token) admin/user-His order</td>
+            <td> _id,numOrder,
+                products,
+                ordering-id of the orderer,
+                turnOn-false,
+                orderDate:{new Date}</td>
+            <td>-</td>
+            <td>delete</td>
+            <td>401- משתמש לא מוזהה, 403- משתמש לא מורשה, 404- לא קיים כזה קוד הזמנה, ו-400 לשגיאה כללית</td>
+            <td>מחיקה הזמנה מסוימת</td>
+        </tr>
+    </table>
+
+</body>

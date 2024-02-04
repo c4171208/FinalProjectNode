@@ -12,10 +12,10 @@ config();
 
 const app=express();
 
-const mongoDB=process.env.DB_CONNECTION ||"mongodb://localhost:27017";
+const mongoDB=process.env.DB_CONNECTION;
 
 //התחברות למסד נתונים
-mongoose.connect(`${mongoDB}/${process.env.DB_NAME||"kondeturia"}`).then(suc=>{
+mongoose.connect(`${mongoDB}`).then(suc=>{
     console.log(`mongo DB conected ${suc.connection.host}`);
 }).catch(err=>{
     console.log(err);

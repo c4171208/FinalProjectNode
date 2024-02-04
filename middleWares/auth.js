@@ -13,7 +13,7 @@ export const auth = async (req, res, next) => {
       next();
    }
    catch (err) {
-      return res.status(401).json({ type: "An error occurred in the middle ware from auth ", message: err.message });
+      return res.status(400).json({ type: "An error occurred in the middle ware from auth ", message: err.message });
 
    }
 
@@ -46,7 +46,7 @@ export const authAcoordingOrder = async (req, res, next) => {
       }
    }
    catch (err) {
-      return res.status(404).json({ type: "An error occurred in the middle ware from authAcoordingOrder ", message: err.message });
+      return res.status(400).json({ type: "An error occurred in the middle ware from authAcoordingOrder ", message: err.message });
 
    }
 
@@ -115,7 +115,7 @@ export const authAdmin = async (req, res, next) => {
       }
    }
    catch (err) {
-      return res.status(401).json({ type: "An error occurred ", message: err.message });
+      return res.status(400).json({ type: "An error occurred ", message: err.message });
 
    }
 

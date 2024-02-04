@@ -5,7 +5,7 @@ import Joi from "joi";
 
 const WatchSchema=mongoose.Schema({
     //איך עושים כמו  ENUM
-    model:String,
+    model:String, 
     description:String,
     collectionMichele:String,
     material:[String],//מערך?

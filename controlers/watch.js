@@ -29,7 +29,7 @@ export const getAllWatches = async (req, res) => {
 export const getWatchById = async (req, res) => {
     try {
         if (!mongoose.isValidObjectId(req.params.id))
-            return res.status(400).send({type:"Invalid code",message:"The code sent is incorrect"})
+            return res.status(404).send({type:"Invalid code",message:"The code sent is incorrect"})
         let watch = await WatchModel.findById(req.params.id)
         if (!watch)
             return res.status(404).send({type:"There is no product with such a code"
@@ -45,7 +45,7 @@ export const deleteWatchById = async (req, res) => {
     let { id } = req.params;
     try {
         if (!mongoose.isValidObjectId(id))
-        return res.status(400).send({type:"Invalid code",message:"The code sent is incorrect"})
+        return res.status(404).send({type:"Invalid code",message:"The code sent is incorrect"})
         let deleted = await WatchModel.findByIdAndDelete(id)
         if (!deleted)
             return res.status(404).send({type:"There is no product with such a code"
@@ -84,7 +84,7 @@ export const putWatchByID = async (req, res) => {
     let { id } = req.params;
     try {
         if (!mongoose.isValidObjectId(id))
-        return res.status(400).send({type:"Invalid code",message:"The code sent is incorrect"})
+        return res.status(404).send({type:"Invalid code",message:"The code sent is incorrect"})
         let watchToUpdate = await WatchModel.findById(id)
         if(!watchToUpdate)
         return res.status(404).send({type:"There is no product with such a code"

@@ -8,7 +8,7 @@ export const addUser = async (req, res) => {
     let validate = userValidatorForSign(req.body);
 
     if (validate.error)
-        return res.status(400).json({ type: "not valid data ", message: validate.error.details[0].message });
+        return res.status(404).json({ type: "not valid data ", message: validate.error.details[0].message });
 
     try {
         let sameUser = await User.findOne({ $or: [{ name }, { tz }, { email }] })
@@ -21,7 +21,7 @@ export const addUser = async (req, res) => {
         await newUser.save();
         let id = newUser._id;
         let token = generateToken(newUser)
-
+        console.log("11111111111111111111111111111111111111111111111111111111111111111111111111111");
         return res.json({ _id: id, email, role: newUser.role, dateOfReg: newUser.dateOfReg, name, tz, token });
     }
     catch (err) {
@@ -46,7 +46,7 @@ export const login = async (req, res) => {
     let { name, password } = req.body;
 
     if (validate.error)
-        return res.status(400).json({ type: "not valid in login", message: validate.error.details[0].message })
+        return res.status(404).json({ type: "not valid in login", message: validate.error.details[0].message })
     try {
         let user = await User.findOne({ name })
         if (!user || !await compare(password, user.password))

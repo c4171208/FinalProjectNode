@@ -20,7 +20,7 @@ export const userValidatorForLogin = (_user) => {
         tz: Joi.string().min(9).pattern(/^[0-9]{9}$/),
         email: Joi.string().email(),
         dateOfReg: Joi.date(),
-        role: Joi.string()
+        // role: Joi.string()
 
     });
 
@@ -34,7 +34,7 @@ export const userValidatorForSign = (_user) => {
         tz: Joi.string().min(9).pattern(/^[0-9]{9}$/).required(),
         email: Joi.string().email().required(),
         dateOfReg: Joi.date(),
-        role: Joi.string()
+        // role: Joi.string()
     });
 
     return schema.validate(_user);

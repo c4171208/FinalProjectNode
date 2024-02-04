@@ -34,7 +34,7 @@ export const addOrder = async (req, res) => {
         // Check if products array is not empty
         if (products.length === 0) {
             return res
-                .status(400)
+                .status(404)
                 .send({
                     type: "bad request",
                     message: "The products array cannot be empty",
@@ -46,7 +46,7 @@ export const addOrder = async (req, res) => {
             const product = await WatchModel.findOne({ model: productIndex.model });
             if (!product) {
                 return res
-                    .status(400)
+                    .status(404)
                     .send({
                         type: "bad request",
                         message: "One of the product is not a product",
@@ -70,7 +70,7 @@ export const addOrder = async (req, res) => {
         return res.json(newOrder);
     } catch (err) {
         return res
-            .status(500)
+            .status(400)
             .send({
                 type: " `An error occurred while adding an order",
                 message: err.message,
@@ -108,7 +108,7 @@ export const deleteOrder = async (req, res) => {
     let { id } = req.params;
     try {
         if (!mongoose.isValidObjectId(id))
-            return res.status(400).send({ type: "Invalid code", message: "The code sent is incorrect" })
+            return res.status(404).send({ type: "Invalid code", message: "The code sent is incorrect" })
         let deleted = await Order.findByIdAndDelete(id)
         if (!deleted)
             return res.status(404).send({
@@ -138,7 +138,7 @@ export const getAllOrders = async (req, res) => {
 export const getAllOrdersByToken = async (req, res) => {
     let token = req.headers["my-token"];
     if (!token)
-        return res.status(401).json({ type: "not authorized333", message: "user not authorized" });
+        return res.status(404).json({ type: "not authorized", message: "user not authorized" });
     try {
         let person = jwt.verify(token, process.env.JWT_SECRET)
         let id1 = person._id;
@@ -156,7 +156,7 @@ export const upDateOrder = async (req, res) => {
     let { id } = req.params;
     try {
         if (!mongoose.isValidObjectId(id))
-            return res.status(400).send({ type: "Invalid code", message: "The code sent is incorrect" })
+            return res.status(404).send({ type: "Invalid code", message: "The code sent is incorrect" })
         const orderToUpDate = await Order.findById(id);
         if (!orderToUpDate)
             return res.status(404).send({ type: "NOT FOUND!!", message: "Sorry, there is no such product to update" })
