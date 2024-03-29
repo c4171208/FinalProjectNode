@@ -9,7 +9,7 @@ import mongoose from "mongoose";
 
 
 export const addOrder = async (req, res) => {
-    const { numOrder, products, turnOn, orderDate } = req.body;
+    const { products, turnOn, orderDate } = req.body;
     const valid = orderValidator(req.body);
 
     if (valid.error) {
@@ -20,17 +20,6 @@ export const addOrder = async (req, res) => {
     }
 
     try {
-        const sameOrder = await Order.findOne({ numOrder });
-
-        if (sameOrder) {
-            return res
-                .status(409)
-                .send({
-                    type: "conflict",
-                    message: "There is already an order with such a numOrder",
-                });
-        }
-
         // Check if products array is not empty
         if (products.length === 0) {
             return res
@@ -52,17 +41,15 @@ export const addOrder = async (req, res) => {
                         message: "One of the product is not a product",
                     });
             }
-            //למה זה מכניס את ה ID ולא את כל השם
 
         }
-        console.log(req.user);
+        console.log("data", req.data);
+        console.log("user: " + req.user);
         // Now you can create the new order
         const newOrder = await new Order({
-            numOrder,
             products,
             turnOn,
             orderDate,
-            //שיניתי לנקודה _ID
             ordering: req.user._id
         });
 
@@ -125,12 +112,12 @@ export const deleteOrder = async (req, res) => {
 
 export const getAllOrders = async (req, res) => {
     try {
-        let orders=await Order.find();
+        let orders = await Order.find();
         return res.json(orders)
 
     } catch (err) {
         return res.status(400).send({ type: "An error occurred while get  all orders", message: err.message })
- 
+
     }
 }
 

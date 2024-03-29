@@ -33,8 +33,8 @@ export const userValidatorForSign = (_user) => {
         password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,15}$')).required(),
         tz: Joi.string().min(9).pattern(/^[0-9]{9}$/).required(),
         email: Joi.string().email().required(),
-        dateOfReg: Joi.date(),
-        // role: Joi.string()
+        dateOfReg: Joi.date().default(new Date),
+        role: Joi.string()
     });
 
     return schema.validate(_user);

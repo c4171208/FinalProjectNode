@@ -4,7 +4,7 @@ import { generateToken } from "./generateToken.js";
 
 export const addUser = async (req, res) => {
 
-    let { name, password, tz, email,role,dateOfReg } = req.body;
+    let { name, password, tz, email, role, dateOfReg } = req.body;
     let validate = userValidatorForSign(req.body);
 
     if (validate.error)
@@ -17,11 +17,11 @@ export const addUser = async (req, res) => {
         }
 
         let hashPassword = await hash(password, 10)
-        let newUser = new User({ name, tz, password: hashPassword, email,role,dateOfReg })
+        let newUser = new User({ name, tz, password: hashPassword, email, role, dateOfReg })
         await newUser.save();
         let id = newUser._id;
         let token = generateToken(newUser)
-        console.log("11111111111111111111111111111111111111111111111111111111111111111111111111111");
+
         return res.json({ _id: id, email, role: newUser.role, dateOfReg: newUser.dateOfReg, name, tz, token });
     }
     catch (err) {
@@ -49,11 +49,15 @@ export const login = async (req, res) => {
         return res.status(404).json({ type: "not valid in login", message: validate.error.details[0].message })
     try {
         let user = await User.findOne({ name })
-        if (!user || !await compare(password, user.password))
-            return res.status(400).send({ type: "please sigh in!", message: err.message })
+        console.log(user);
+
+        if (!user || !(await compare(password, user.password))) {
+            console.log("enter");
+            return res.status(401).send({ type: "please sigh in!", message: " err.message" })
+        }
         let token = generateToken(user)
 
-        return res.json({ _id: user._id, email:user.email, role: user.role, dateOfReg: user.dateOfReg, name, tz:user.tz, token });
+        return res.json({ _id: user._id, email: user.email, role: user.role, dateOfReg: user.dateOfReg, name, tz: user.tz, token });
     }
     catch (err) {
 
