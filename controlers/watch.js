@@ -50,24 +50,7 @@ export const getWatchById = async (req, res) => {
 
     }
 }
-//old
-// export const getWatchesByCategory = async (req, res) => {
 
-//     let perPage = req.query.perPage || 5; // הגבלה ל-10 מוצרים בברירת מחדל
-//     let page = req.query.page || 1;
-//     let category = req.params.category;
-//     try {
-//         let watchesByThuscategory = await WatchModel.find({ category }) 
-//         .skip((page - 1) * perPage)
-//         .limit(perPage);
-
-//         return res.json(watchesByThuscategory)
-//     }
-//     catch (err) {
-//         return res.status(400).send({ type: "An error occurred while fetching products by catagory", message: err.message })
-
-//     }
-// }
 
 export const getWatchesByCategory = async (req, res) => {
     let perPage = req.query.perPage || 3;
@@ -112,63 +95,20 @@ export const deleteWatchById = async (req, res) => {
 }
 
 // פונקציה זו מעלה-תמונות מהשרת
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, 'staticFile/images/');
-//     },
-//     filename: function (req, file, cb) {
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'staticFile/images/');
+    },
+    filename: function (req, file, cb) {
 
-//         // Extract the original filename from the file object
-//         const originalFilename = file.originalname;
+        // Extract the original filename from the file object
+        const originalFilename = file.originalname;
 
-//         cb(null, originalFilename);
-//     }
-// });
+        cb(null, originalFilename);
+    }
+});
 
-// const upload = multer({ storage: storage }).single('file');
-
-// export const addWatch = async (req, res) => {
-
-//     upload(req, res, async (err) => {
-//         if (err) {
-//           console.error(err);
-//           return res.status(500).send('Error uploading image.');
-//         }
-//         let originalFilename = req.file?.originalname; // השתמש בשילוב אופציונלי
-
-
-//     let { price, description, model,category, IsLimitedEtition, collectionMichele,caseSize
-//         ,movement,caseMaterial,strapSize ,silhouette ,TotalDiamondCarats, TotalDiamondCount
-//         , urlImg,batteryType,uploadDate ,imgUrl} = req.body;
-//         console.log( price, description, model,category);
-
-//     let result = watchValidator(price, description, model,category, IsLimitedEtition, collectionMichele,caseSize
-//         ,movement,caseMaterial,strapSize ,silhouette ,TotalDiamondCarats, TotalDiamondCount
-//         , urlImg,batteryType,uploadDate )
-//     if (result.error)
-//         return res.status(404).send({ type: "the data is not ok", message: result.error.details[0].message })
-
-//     try {
-//         let sameWatch = await WatchModel.find({ model, price });
-//         if (sameWatch.length > 0)
-//             return res.status(409).send({ type: "conflict", message: "There is already a product with such a model and price" })
-//         let newWatch = new WatchModel({
-//             price, description, model,category, IsLimitedEtition, collectionMichele,caseSize
-//             ,movement,caseMaterial,strapSize ,silhouette ,TotalDiamondCarats, TotalDiamondCount
-//             ,batteryType,uploadDate ,imgUrl:originalFilename
-
-//         });
-//         await newWatch.save();
-//         return res.json(newWatch)
-//     }
-//     catch (err) {
-//         return res.status(550).send({ type: "An error occurred while in addition a product", message: err.message })
-
-//     }
-// }
-// )
-// }
-
+const upload = multer({ storage: storage }).single('file');
 
 
 export const addWatch = async (req, res) => {
@@ -191,7 +131,6 @@ export const addWatch = async (req, res) => {
     }
     catch (err) {
         return res.status(400).send({ type: "An error occurred while in addition a product", message: err.message })
-
     }
 
 }

@@ -1,12 +1,8 @@
 import { Order, orderValidator } from "../models/order.js";
-import { watchValidator } from "../models/watch.js"
 import { WatchModel } from "../models/watch.js";
 import jwt from "jsonwebtoken";
 
-
 import mongoose from "mongoose";
-
-
 
 export const addOrder = async (req, res) => {
     const { products, turnOn, orderDate } = req.body;
@@ -41,10 +37,8 @@ export const addOrder = async (req, res) => {
                         message: "One of the product is not a product",
                     });
             }
-
         }
-        console.log("data", req.data);
-        console.log("user: " + req.user);
+       
         // Now you can create the new order
         const newOrder = await new Order({
             products,
@@ -64,32 +58,6 @@ export const addOrder = async (req, res) => {
             });
     }
 };
-
-
-// export const addOrder=async (req,res)=>{
-// const {numOrder,products,turnOn,orderDate}=req.body;
-// let valid=orderValidator(req.body);
-// if(valid.error)
-//   return res.status(404).send({type:"the data is not ok",message:valid.error.details[0].message})
-// ///להוסיף את הID של המוצרים בצורה ידנית וכן לעבור על כל המוצרים ולבדוק שיש אכן מוצר כזה
-//   try {
-//     let sameOrder = await Order.findOne({numOrder})
-
-//     if (sameOrder) 
-//         return res.status(409).send({ type: "conflict", message: "There is already a order with such a numOrder" })
-
-//     let newOrder=await new Order({numOrder,products,turnOn,orderDate});
-
-//     await newOrder.save();
-//     return res.send(newOrder)
-
-// }
-// catch(err){
-//     return res.status(400).send({ type: "An error occurred while in addition a order", message: err.message })
-
-// }
-// }
-
 
 export const deleteOrder = async (req, res) => {
     let { id } = req.params;
@@ -139,6 +107,7 @@ export const getAllOrdersByToken = async (req, res) => {
 
     }
 }
+
 export const upDateOrder = async (req, res) => {
     let { id } = req.params;
     try {
@@ -154,11 +123,7 @@ export const upDateOrder = async (req, res) => {
 
     catch (err) {
         return res.status(400).send({ type: "An error occurred while upDate the order by the admin", message: err.message })
-
     }
-
-
-
 }
 
 

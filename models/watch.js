@@ -22,8 +22,6 @@ const WatchSchema = mongoose.Schema({
     urlImg: String,
     batteryType: Number,
     uploadDate: { type: Date, default: new Date },
-    imgUrl: String
-
 })
 
 

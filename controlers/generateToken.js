@@ -10,7 +10,6 @@ export const generateToken = (user) => {
 
     const token = jwt.sign(data, jwtSecretKey, {
         expiresIn: '45m'
-
     });
 
     return token;

@@ -9,5 +9,4 @@ router.post("/", auth, addOrder)
 router.delete("/:id", authAcoordingOrder, deleteOrder)
 router.put("/:id", authAdmin, upDateOrder)
 
-
 export default router;
